@@ -61,3 +61,9 @@ model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accur
 model.fit(x=train_images, y=train_labels, validation_data=(test_images, test_labels), epochs=10)
 
 model.save('./Mind_model')
+
+converter = tf.lite.TFLiteConverter.from_saved_model('./Mind_model')
+tflite_model = converter.convert()
+
+with open('./mind_AI.tflite', 'wb') as f:
+    f.write(tflite_model)
